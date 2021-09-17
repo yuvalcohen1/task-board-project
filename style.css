@@ -1,0 +1,129 @@
+.app-container {
+    background-image: url(/img/myTaskBoard.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 937px;
+    background-size: 100% 100%;
+}
+
+.title {
+    text-align: center;
+    padding-top: 65px;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 60px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+.inputs-container {
+    width: 450px;
+    height: 370px;
+    background-image: url(img/main\ note.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btns-container {
+    display: flex;
+    justify-content: center;
+}
+
+.save-btn {
+    margin-right: 10px;
+}
+
+.reset-btn {
+    margin-left: 10px;
+}
+
+.inputs {
+    width: 200px;
+}
+
+.first {
+    margin-top: 100px;
+}
+
+.btns-container {
+    margin-top: 20px;
+}
+
+
+.notes-container {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    padding-bottom: 77px;
+}
+
+@media (min-width: 768px){
+    .inputs-container {
+        width: 600px;
+        height: 385px;
+    }
+
+    .inputs {
+        width: 300px;
+    }
+
+    .notes-container {
+        padding-left: 50px;
+    }
+}
+
+.note {
+    width: 178px;
+    margin-left: 50px;
+    height: 248px;
+    background-image: url(/img/notebg.png);
+    padding-top: 50px;
+    position: relative;
+    animation: fade-in 0.5s;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.description-container {  
+    text-align: center;
+    margin: 0 auto;
+    width: 150px;
+    height: 120px;
+    word-wrap: break-word;
+    overflow-y: auto;
+}
+
+.date-time {
+    padding-left: 15px;
+    padding-top: 20px;
+}
+
+.note i {
+    display: none;
+}
+
+.note:hover i {
+    position: absolute;
+    top: 23px;
+    left: 11px;
+    font-size: 25px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    display: inline-block;
+}
+
+i:hover {
+    transform: rotate(1turn);
+}
