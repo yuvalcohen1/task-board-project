@@ -2,33 +2,6 @@ const state = {
     notes: []
 };
 
-// set today's date variable
-let today = new Date();
-let dd = today.getDate();
-let mm = today.getMonth() + 1;
-const yyyy = today.getFullYear();
-
-if (dd < 10) {
-    dd = '0' + dd;
-}
-if (mm < 10) {
-    mm = '0' + mm;
-}
-
-today = `${yyyy}-${mm}-${dd}`;
-
-// set current time variable
-let currentHour = new Date().getHours();
-if (currentHour < 10) {
-    currentHour = '0' + currentHour;
-}
-let currentMinutes = new Date().getMinutes();
-if (currentMinutes < 10) {
-    currentMinutes = '0' + currentMinutes;
-}
-const currentTime = `${currentHour}:${currentMinutes}`;
-
-
 main();
 
 
@@ -38,6 +11,38 @@ function main() {
     setMinDate();
     initNoteForm();
     resetForm();
+}
+
+function getCurrentTime() {
+    let currentHour = new Date().getHours();
+    if (currentHour < 10) {
+        currentHour = '0' + currentHour;
+    }
+    let currentMinutes = new Date().getMinutes();
+    if (currentMinutes < 10) {
+        currentMinutes = '0' + currentMinutes;
+    }
+    const currentTime = `${currentHour}:${currentMinutes}`;
+
+    return currentTime;
+}
+
+function getTodaysDate() {
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1;
+    const yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    today = `${yyyy}-${mm}-${dd}`;
+
+    return today;
 }
 
 
@@ -113,6 +118,7 @@ function renderNotes(noteEl) {
 
 function setMinDate() {
     const dateInput = document.querySelector(".date-input");
+    const today = getTodaysDate();
     dateInput.setAttribute("min", today);
 }
 
@@ -120,8 +126,10 @@ function setMinDate() {
 function setMinTimeOfToday() {
     const dateInput = document.querySelector(".date-input");
     dateInput.addEventListener("change", e => {
+        const today = getTodaysDate();
         if (e.target.value === today) {
             const timeInput = document.querySelector(".time-input");
+            const currentTime = getCurrentTime();
             timeInput.min = currentTime;
         }
     });
@@ -145,6 +153,8 @@ function saveNote(note) {
 // load from local storage the updated array of notes after removing the expired notes
 function loadFromLocalStorage() {
     const notesAsRegularCode = JSON.parse(localStorage.getItem("notes")) || [];
+    const today = getTodaysDate();
+    const currentTime = getCurrentTime();
     const validNotes = notesAsRegularCode.filter(note => (note.date > today) || (note.date === today && note.time >= currentTime));
     const validNotesAsJsonString = JSON.stringify(validNotes);
     localStorage.setItem("notes", validNotesAsJsonString);
